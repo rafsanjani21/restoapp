@@ -1,6 +1,5 @@
 package com.example.slicing.pages
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,15 +20,18 @@ import androidx.compose.ui.unit.dp
 import com.example.slicing.R
 import com.example.slicing.ui.home.CategorySection
 import com.example.slicing.ui.home.GreetingSection
-import com.example.slicing.ui.home.HomeBackgroundColor
 import com.example.slicing.ui.home.HomeTopBar
 import com.example.slicing.ui.home.OpenRestaurantHeader
 import com.example.slicing.ui.home.RestaurantCard
 import com.example.slicing.ui.home.RestaurantUi
 import com.example.slicing.ui.home.SearchSection
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import android.net.Uri
+
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavController) {
     val accentYellow = Color(0xFFFFC857)
     val primaryDark = Color(0xFF25253F)
     val lightGrey = Color(0xFFF5F)
@@ -76,7 +78,6 @@ fun HomeScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(HomeBackgroundColor)
     ) {
         Card(
             modifier = Modifier.fillMaxSize(),
@@ -124,9 +125,30 @@ fun HomeScreen() {
                 }
 
                 items(restaurants) { restaurant ->
-                    RestaurantCard(restaurant = restaurant)
+
+                    RestaurantCard(
+                        restaurant = restaurant,
+                        onClick = {
+                            val name = Uri.encode(restaurant.name)
+                            val desc = Uri.encode(restaurant.desc)
+                            val delivery = Uri.encode(restaurant.deliveryFee)
+                            val eta = Uri.encode(restaurant.eta)
+
+                            navController.navigate(
+                                "restaurantDetail" +
+                                        "/${restaurant.imageRes}" +
+                                        "/$name" +
+                                        "/$desc" +
+                                        "/${restaurant.rating}" +
+                                        "/$delivery" +
+                                        "/$eta"
+                            )
+                        }
+                    )
+
                     Spacer(modifier = Modifier.height(16.dp))
                 }
+
             }
         }
     }
@@ -136,6 +158,6 @@ fun HomeScreen() {
 @Composable
 fun HomeScreenPreview() {
     MaterialTheme {
-        HomeScreen()
+        HomeScreen(navController = rememberNavController())
     }
 }

@@ -1,7 +1,6 @@
 package com.example.slicing.ui.home
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -21,11 +20,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.slicing.R
 
 @Composable
 fun OpenRestaurantHeader() {
@@ -55,24 +52,11 @@ fun OpenRestaurantHeader() {
     }
 }
 
-@Preview
-@Composable
-fun RestaurantCardPreview() {
-    RestaurantCard(
-        restaurant = RestaurantUi(
-            imageRes = R.drawable.res1,
-            name = "Vegan Resto",
-            desc = "12km - $$",
-            rating = "4.8",
-            deliveryFee = "Free",
-            eta = "20-30 min"
-        )
-    )
-}
 
 @Composable
 fun RestaurantCard(
     restaurant: RestaurantUi,
+    onClick: () -> Unit
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -80,7 +64,8 @@ fun RestaurantCard(
         colors = CardDefaults.cardColors(
             containerColor = Color.White
         ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+        onClick = onClick
     ) {
         Column(
             modifier = Modifier.padding(bottom = 16.dp)
