@@ -1,5 +1,6 @@
 package com.example.slicing.pages
 
+import android.R.attr.contentDescription
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,6 +29,19 @@ import com.example.slicing.ui.home.SearchSection
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import android.net.Uri
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.MailOutline
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Surface
+import androidx.compose.ui.Alignment
 
 
 @Composable
@@ -35,6 +49,7 @@ fun HomeScreen(navController: NavController) {
     val accentYellow = Color(0xFFFFC857)
     val primaryDark = Color(0xFF25253F)
     val lightGrey = Color(0xFFF5F)
+    val orange = Color(0xFFFF7A1A)
 
 
     // list
@@ -101,8 +116,12 @@ fun HomeScreen(navController: NavController) {
                 }
 
                 item {
-                    GreetingSection()
-                    Spacer(modifier = Modifier.height(20.dp))
+                    GreetingSection(
+                        onProfileClick = {
+                            navController.navigate("profile")
+                        }
+                    )
+                    Spacer(modifier = Modifier.height(24.dp))
                 }
 
                 item {
@@ -149,6 +168,23 @@ fun HomeScreen(navController: NavController) {
                     Spacer(modifier = Modifier.height(16.dp))
                 }
 
+            }
+        }
+        Surface(
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .offset(x = (-20).dp, y = -30.dp)
+                .size(60.dp),
+            shape = CircleShape,
+            color = orange,
+            shadowElevation = 4.dp
+        ) {
+            IconButton(onClick = { /* TODO: implement */ }) {
+                Icon(
+                    imageVector = Icons.Default.Email,
+                    contentDescription = "Chat",
+                    tint = Color.White
+                )
             }
         }
     }

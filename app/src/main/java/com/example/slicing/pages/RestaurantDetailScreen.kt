@@ -1,4 +1,4 @@
-package com.example.slicing.ui.home
+package com.example.slicing.pages
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -33,6 +33,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.slicing.R
+import com.example.slicing.ui.home.HomeAccentYellow
+import com.example.slicing.ui.home.HomeLightGrey
+import com.example.slicing.ui.home.HomePrimaryDark
+import com.example.slicing.ui.home.RestaurantUi
 
 data class MenuItemUi(
     val name: String,
@@ -55,6 +59,10 @@ fun RestaurantDetailScreen(
             MenuItemUi("Burger Ferguson", restaurant.name, "$40", R.drawable.burger),
             MenuItemUi("Rockin' Burgers", "Cafecachino", "$40", R.drawable.burger),
             MenuItemUi("Double Cheese", "House Special", "$45", R.drawable.burger),
+            MenuItemUi("Big Combo", "Spicy Restaurant", "$55", R.drawable.burger),
+            MenuItemUi("Big Combo", "Spicy Restaurant", "$55", R.drawable.burger),
+            MenuItemUi("Big Combo", "Spicy Restaurant", "$55", R.drawable.burger),
+            MenuItemUi("Big Combo", "Spicy Restaurant", "$55", R.drawable.burger),
             MenuItemUi("Big Combo", "Spicy Restaurant", "$55", R.drawable.burger),
         )
     }
@@ -177,11 +185,12 @@ fun RestaurantDetailScreen(
 
             // ---- MENU DALAM 2 KOLOM (LAZYCOLUMN) ----
             LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                modifier = Modifier.fillMaxSize()
             ) {
                 items(menuItems.chunked(2)) { rowItems ->
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier.fillMaxSize(),
                         horizontalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         // kiri

@@ -11,7 +11,9 @@ import com.example.slicing.pages.HomeScreen
 import com.example.slicing.ui.home.SplashScreen
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
-import com.example.slicing.ui.home.RestaurantDetailScreen
+import com.example.slicing.pages.ProfileScreen
+import com.example.slicing.pages.RestaurantDetailScreen
+import com.example.slicing.ui.home.EditProfileScreen
 import com.example.slicing.ui.home.RestaurantUi
 
 
@@ -31,6 +33,11 @@ class MainActivity : ComponentActivity() {
                 composable("splash") { SplashScreen(navController) }
 
                 composable("home") { HomeScreen(navController) }
+
+                composable("profile") { ProfileScreen(navController) }
+
+                composable("editProfile") { EditProfileScreen(navController) }
+
 
                 composable(
                     route = "restaurantDetail/{imageRes}/{name}/{desc}/{rating}/{deliveryFee}/{eta}",
